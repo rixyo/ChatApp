@@ -1,0 +1,15 @@
+
+
+.home__bg {
+    background-image: url(https://wildcardbrewingco.com/wp-content/uploads/2020/06/networking-768x620.jpg);
+    height: 92vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+.home-message-icon {
+    margin-left: 10px;
+    display: inline-block;
+}
