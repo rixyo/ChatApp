@@ -3,7 +3,7 @@ const {StatusCodes}=require('http-status-codes')
 const {BadRequestError, UnauthenticatedError}=require('../errors')
 
 
-const user = require("../models/user")
+
 
 const register=async(req,res)=>{
     
@@ -11,7 +11,7 @@ const register=async(req,res)=>{
     const user=await User.create({...req.body})
     const token=user.createJwt()
     
-    res.status(StatusCodes.CREATED).json({ user:{name: user.name },token})
+    res.status(StatusCodes.CREATED).json(user)
 }
 const login=async(req,res)=>{
    const{email,password}=req.body
@@ -36,7 +36,8 @@ const login=async(req,res)=>{
 
   }
   const token=user.createJwt()
-  res.status(StatusCodes.OK).json({user:{name:user.name},token})
+  
+  res.status(StatusCodes.OK).json(user)
 }
 
 

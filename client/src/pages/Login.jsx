@@ -1,14 +1,37 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import { Link, useNavigate } from "react-router-dom";
+
+
 
 import { Container,Col,Row,Button,Form } from 'react-bootstrap';
 import "./Login.css"
+import {useLoginUserMutation} from "../services/appApi"
+import {AppContext} from "../context/appContext"
+
 
 const Login = () => {
-  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const {socket }=useContext(AppContext)
+
+
+  const [loginUser, { isLoading, error }] = useLoginUserMutation();
   const handleLogin=(e)=>{
     e.preventDefault();
+    loginUser({ email, password }).then(({ data }) => {
+      console.log(data)
+      if (data) {
+          // socket work
+          socket.emit('new-user')
+          
+          // navigate to the chat
+          navigate("/chat");
+      }
+  });
+
+   
+       
 
   }
  
@@ -19,8 +42,8 @@ const Login = () => {
         <Col md={7} className="d-flex align-items-center justify-content-center flex-direction-column">
     <Form style={{ width: "80%", maxWidth: 500 }} onSubmit={handleLogin}>
       <Form.Group className="mb-3" controlId="formBasicName">
-        <Form.Label>User Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter username" onChange={(e) => setUserName(e.target.value)} value={userName} required/>
+        <Form.Label>Email</Form.Label>
+        <Form.Control type="email" placeholder="Enter username" onChange={(e) => setEmail(e.target.value)} value={email} required/>
        
       </Form.Group>
 

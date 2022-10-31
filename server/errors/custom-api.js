@@ -3,5 +3,4 @@ class CustomAPIError extends Error {
       super(message)
     }
   }
-  
-  module.exports = CustomAPIError
+  module.exports=CustomAPIError

@@ -54,10 +54,10 @@ const Signup = () => {
         console.log(url);
         // signup the user
         signupUser({ name,email, password, picture: url }).then(({ data }) => {
-          console.log(data)
+         // console.log(data)
             if (data) {
                 console.log(data);
-                navigate("/chat");
+                navigate("/login");
             }
         });
 
