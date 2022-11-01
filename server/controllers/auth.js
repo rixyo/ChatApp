@@ -11,7 +11,7 @@ const register=async(req,res)=>{
     const user=await User.create({...req.body})
     const token=user.createJwt()
     
-    res.status(StatusCodes.CREATED).json(user)
+    res.status(StatusCodes.CREATED).json({name:user.name,status:user.status,picture:user.picture,newMessages:user.newMessages,token})
 }
 const login=async(req,res)=>{
    const{email,password}=req.body
@@ -37,7 +37,7 @@ const login=async(req,res)=>{
   }
   const token=user.createJwt()
   
-  res.status(StatusCodes.OK).json(user)
+  res.status(StatusCodes.OK).json({name:user.name,status:user.status,picture:user.picture,newMessages:user.newMessages,token})
 }
 
 
